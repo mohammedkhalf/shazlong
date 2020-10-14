@@ -1,0 +1,34 @@
+/* smart phones and tablets*/
+@media (max-width: 767px)
+{
+	.navbar-nav > li > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    line-height: 20px;
+    }
+
+    .sub .form-control {
+    border-radius: 0px;
+    margin: 20 auto;
+    width: 400px;
+	}
+	.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+    max-height: none;
+    }
+
+}
+/* small screen*/
+@media (min-width: 768px) and (max-width: 991 px)
+{
+
+}
+/* media screen*/
+@media (min-width: 992px) and (max-width: 1199 px)
+{
+
+}
+/* large screen*/
+@media (min-width: 1200px) 
+{
+
+}
