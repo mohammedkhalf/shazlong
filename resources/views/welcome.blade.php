@@ -3,7 +3,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap</title>
+    <title>Shazlong</title>
     
     <link  rel="stylesheet" type="text/css" href="{{url('/')}}/frontend/css/bootstrap.css">
 
