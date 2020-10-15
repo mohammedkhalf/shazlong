@@ -16,3 +16,5 @@
 // });
 
 Route::get('/','HomePageController@index');
+Route::get('/doctor/{id}/show', 'HomePageController@show')->name('doctor.show');
+

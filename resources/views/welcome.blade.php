@@ -98,23 +98,18 @@
                             <div class="modal-dialog vertical-align-center">
                                 <div class="modal-content">
                                     
-
                                     <div class="modal-body">
-
                                        <div class="row">
-
-
                                             <div class="col-md-7 profile-info">
-                                               <h2 class="text-info"> د.فاطمة قطب  </h2>
-                                               <p> استشاري الصحة النفسية </p>
-                                               <p> تخصص : اضطراب قلق الفراق، القلق العام، الرهاب الاجتماعي and العلاقات </p>
-
-                                               <p> <i class="fa fa-money" aria-hidden="true"></i> جنيه 200/ 30 دقيقة </p>
+                                               <h2 class="text-info" id="doctor_name"> </h2>
+                                               <p id="speclist-model"></p>
+                                               <p id="doctor-major"> </p> 
+                                               <!-- p id="price-per-half"></p-->
 
                                             </div>
 
                                             <div class="col-md-4 profile-img">
-                                                 <img class="img-circle" style="height:150px; width: 150px" src="http://placekitten.com/g/200/200" />
+                                                 <img  id="doctor-img" class="img-circle" style="height:150px; width: 150px" src="" />
                                             </div> <!-- img profile -->
                                         </div>
 
@@ -161,7 +156,6 @@
                                       <option value="3"> الاعلي تقيما</option>
                                   </select>
                                 </div><!-- /input-group -->
-
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"> 
                                 <div class="form-group">
@@ -197,7 +191,7 @@
                                           <li> {{ $doctor->price_per_half }} <i class="fa fa-money" aria-hidden="true"></i> </li>
                                         </ul>    
                                         <button  id="profile" class="btn btn-primary"> الملف الشخصي </button>
-                                        <button  id="reserv" class="btn btn-primary" data-toggle="modal" data-target="#myModal">الحجز الان </button>    
+                                        <button  id="reserv" data-id="{{$doctor->id}}" class="btn btn-primary" data-toggle="modal" data-target="#myModal">الحجز الان </button>    
                               </div>
                           </div>
 
@@ -378,6 +372,29 @@
   <script type="text/javascript">
 
     $(document).ready(function(){
+          $.ajaxSetup({
+                headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+          });
+          // Get Request Data For Model
+          $('body').on('click', '#reserv', function (event) {
+            event.preventDefault();
+            var id = $(this).data('id');
+            $.get('doctor/' + id + '/show', function (data) {
+                $("#doctor_name").html(data.data.name)
+                $("#speclist-model").html(data.data.speclist)
+                $("#doctor-major").html(data.data.major.name)
+                $("#price-per-half").html(data.data.price_per_half)
+                document.getElementById("doctor-img").src = data.data.image
+            }); //get
+          }); 
+
+
+
+
+
+
         /* 1. Visualizing things on Hover - See next part for action on click */
         $('#stars li').on('mouseover', function(){
           var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
