@@ -220,6 +220,11 @@ h1,h2,h3,h4,h5 .lead
 {
 	margin-bottom:50px; 
 }
+.price_box h3
+{
+	font-family: 'Cairo';
+	font-size: 15px;
+}
 .price_table .price_box
 {
 	background: #fff;
@@ -926,4 +931,8 @@ border-radius: 4px;
 #calender
 {
 	color:#3da8c0;
+}
+#major
+{
+	font-weight: bold;
 }

@@ -155,10 +155,10 @@
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                   <select class="form-control input-lg" dir="rtl" id="sel2">
-                                      <option>رتب  حسب </option>
-                                      <option>2</option>
-                                      <option>3</option>
-                                      <option>4</option>
+                                      <option value="0">رتب  حسب </option>
+                                      <option value="1"> من الاقل الي الاعلي </option>
+                                      <option value="2"> من  الاعلي الي الاقل </option>
+                                      <option value="3"> الاعلي تقيما</option>
                                   </select>
                                 </div><!-- /input-group -->
 
@@ -166,10 +166,11 @@
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"> 
                                 <div class="form-group">
                                   <select class="form-control input-lg" dir="rtl" id="sel1">
-                                      <option>جميع التخصصات</option>
-                                      <option>2</option>
-                                      <option>3</option>
-                                      <option>4</option>
+                                      <option value="0">جميع التخصصات</option>
+                                      @foreach($allMajors as $major)
+                                          <option value="{{$major->id}}"> {{$major->name}} </option>
+                                      @endforeach
+                                     
                                   </select>
                                 </div><!-- /input-group -->
                             </div>
@@ -181,101 +182,29 @@
                         </div> <!-- Filter Inputs -->
 
                          
-                          <!-- theripst Card -->
+                        @foreach($allDoctors as $doctor)
+
                           <div class="col-md-4 col-sm-6 col-xs-12 hvr-push">
-                                    <div class="price_box ">
-                                        <h2 class="text-info">cloud</h2>
-                                        <p class="center-block">60$</p>
+                              <div class="price_box">
+                                        <a>
+                                          <img class="img-circle" width="110px" height="90px" src="{{ $doctor->image }}" />
+                                        </a>
+                                        <h3 class="text-info">  د. {{ $doctor->name }} </h3>
+
                                         <ul class="list-unstyled">
-                                          <li>Email:2</li>
-                                          <li>space:50mb</li>
-                                          <li>database:2</li>
-                                          <li>ftp:2acount</li>
+                                          <li> {{ $doctor->speclist }}  </li>
+                                          <li id="major">{{ $doctor->major->name }} </li>
+                                          <li> {{ $doctor->price_per_half }} <i class="fa fa-money" aria-hidden="true"></i> </li>
                                         </ul>    
                                         <button  id="profile" class="btn btn-primary"> الملف الشخصي </button>
                                         <button  id="reserv" class="btn btn-primary" data-toggle="modal" data-target="#myModal">الحجز الان </button>    
-                                    </div>
+                              </div>
                           </div>
 
-                           <!-- theripst Card -->
-                          <div class="col-md-4 col-sm-6 col-xs-12 hvr-push">
-                                    <div class="price_box ">
-                                        <h2 class="text-info">cloud</h2>
-                                        <p class="center-block">60$</p>
-                                        <ul class="list-unstyled">
-                                          <li>Email:2</li>
-                                          <li>space:50mb</li>
-                                          <li>database:2</li>
-                                          <li>ftp:2acount</li>
-                                        </ul>    
-                                        <button  id="profile" class="btn btn-primary"> الملف الشخصي </button>
-                                        <button  id="reserv" class="btn btn-primary" data-toggle="modal" data-target="#myModal">الحجز الان </button>    
-                                    </div>
-                          </div>
+                        @endforeach
 
-                           <!-- theripst Card -->
-                          <div class="col-md-4 col-sm-6 col-xs-12 hvr-push">
-                                    <div class="price_box ">
-                                        <h2 class="text-info">cloud</h2>
-                                        <p class="center-block">60$</p>
-                                        <ul class="list-unstyled">
-                                          <li>Email:2</li>
-                                          <li>space:50mb</li>
-                                          <li>database:2</li>
-                                          <li>ftp:2acount</li>
-                                        </ul>    
-                                        <button  id="profile" class="btn btn-primary"> الملف الشخصي </button>
-                                        <button  id="reserv" class="btn btn-primary" data-toggle="modal" data-target="#myModal">الحجز الان </button>    
-                                    </div>
-                          </div>
 
-                          <!-- theripst Card -->
-                          <div class="col-md-4 col-sm-6 col-xs-12 hvr-push">
-                                    <div class="price_box ">
-                                        <h2 class="text-info">cloud</h2>
-                                        <p class="center-block">60$</p>
-                                        <ul class="list-unstyled">
-                                          <li>Email:2</li>
-                                          <li>space:50mb</li>
-                                          <li>database:2</li>
-                                          <li>ftp:2acount</li>
-                                        </ul>    
-                                        <button  id="profile" class="btn btn-primary"> الملف الشخصي </button>
-                                        <button  id="reserv" class="btn btn-primary" data-toggle="modal" data-target="#myModal">الحجز الان </button>    
-                                    </div>
-                          </div>
-
-                          <!-- theripst Card -->
-                          <div class="col-md-4 col-sm-6 col-xs-12 hvr-push">
-                                    <div class="price_box ">
-                                        <h2 class="text-info">cloud</h2>
-                                        <p class="center-block">60$</p>
-                                        <ul class="list-unstyled">
-                                          <li>Email:2</li>
-                                          <li>space:50mb</li>
-                                          <li>database:2</li>
-                                          <li>ftp:2acount</li>
-                                        </ul>    
-                                        <button  id="profile" class="btn btn-primary"> الملف الشخصي </button>
-                                        <button  id="reserv" class="btn btn-primary" data-toggle="modal" data-target="#myModal">الحجز الان </button>    
-                                    </div>
-                          </div>
-
-                          <!-- theripst Card -->
-                          <div class="col-md-4 col-sm-6 col-xs-12 hvr-push">
-                                    <div class="price_box ">
-                                        <h2 class="text-info">cloud</h2>
-                                        <p class="center-block">60$</p>
-                                        <ul class="list-unstyled">
-                                          <li>Email:2</li>
-                                          <li>space:50mb</li>
-                                          <li>database:2</li>
-                                          <li>ftp:2acount</li>
-                                        </ul>    
-                                        <button  id="profile" class="btn btn-primary"> الملف الشخصي </button>
-                                        <button  id="reserv" class="btn btn-primary" data-toggle="modal" data-target="#myModal">الحجز الان </button>    
-                                    </div>
-                          </div>
+                           
 
                       </div>
                       <div class="col-md-3 col-sm-6 col-xs-12">
