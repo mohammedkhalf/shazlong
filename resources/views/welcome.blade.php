@@ -1,12 +1,11 @@
 <html lang="en">
 <head>
+    <meta name="_token" content="{{ csrf_token() }}">
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Shazlong</title>
-    
     <link  rel="stylesheet" type="text/css" href="{{url('/')}}/frontend/css/bootstrap.css">
-
   <link  rel="stylesheet" type="text/css" href="{{url('/')}}/frontend/css/font-awesome.min.css">
   <link  rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans' >
   <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
@@ -104,8 +103,6 @@
                                                <h2 class="text-info" id="doctor_name"> </h2>
                                                <p id="speclist-model"></p>
                                                <p id="doctor-major"> </p> 
-                                               <!-- p id="price-per-half"></p-->
-
                                             </div>
 
                                             <div class="col-md-4 profile-img">
@@ -170,21 +167,23 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"> 
                                  <div class="input-group">
-                                    <input type="text" class="form-control input-lg" dir="rtl" placeholder="بحث باسم المعالج">
+                                    <input type="text" id="search-input" class="form-control input-lg" dir="rtl" placeholder="بحث باسم المعالج">
                                   </div><!-- /input-group -->
                             </div>
                         </div> <!-- Filter Inputs -->
 
-                         
-                        @foreach($allDoctors as $doctor)
+                          <div class="search_result"  style="display: none;margin-top:50px">
+                                <p class="text-info" id="search-name"></p>
+                                <p id="search-spelist"></p>    
+                          </div>
 
+                        @foreach($allDoctors as $doctor)
                           <div class="col-md-4 col-sm-6 col-xs-12 hvr-push">
                               <div class="price_box">
                                         <a>
                                           <img class="img-circle" width="110px" height="90px" src="{{ $doctor->image }}" />
                                         </a>
                                         <h3 class="text-info">  د. {{ $doctor->name }} </h3>
-
                                         <ul class="list-unstyled">
                                           <li> {{ $doctor->speclist }}  </li>
                                           <li id="major">{{ $doctor->major->name }} </li>
@@ -196,13 +195,12 @@
                           </div>
 
                         @endforeach
-
-
-                           
-
                       </div>
+
+                            
+
                       <div class="col-md-3 col-sm-6 col-xs-12">
-                          <div class="price_box" id="sidebar">
+                          <div id="sidebar">
                               <h2 class="text-info">التصنيف </h2><hr/>
                               <h4 class="text-info"> المواعيد المتاحه والمده <i class="fa fa-calendar" aria-hidden="true"></i> </h4><br/>
                               <div class="row">
@@ -373,10 +371,34 @@
 
     $(document).ready(function(){
           $.ajaxSetup({
-                headers: {
+                headers:
+                {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
+                }
           });
+
+          //ajax search input
+          $('#search-input').on('keyup',function(){
+              $value = $(this).val();
+              $.ajax({
+                  type : 'get',
+                  url : '{{URL::to('search')}}',
+                  data:{'search':$value},
+                  success:function(data){
+                      $('.price_box').css('display','none');
+                      $('.search_result').css('display','block');
+                      // console.log(data.data.length);
+                      for($i=0;$i<data.data.length;$i++)
+                      {
+                          $("#search-name").html(data.data[$i].name)
+                          $("#search-spelist").html(data.data[$i].speclist)
+                          $("#half-price-per-half").html(data.data[$i].price_per_half)
+                          $("#half-price-per-hour").html(data.data[$i].price_per_hour)
+                      }
+                  }
+              }); //ajax
+          })
+
           // Get Request Data For Model
           $('body').on('click', '#reserv', function (event) {
             event.preventDefault();
@@ -388,11 +410,7 @@
                 $("#price-per-half").html(data.data.price_per_half)
                 document.getElementById("doctor-img").src = data.data.image
             }); //get
-          }); 
-
-
-
-
+          });
 
 
         /* 1. Visualizing things on Hover - See next part for action on click */

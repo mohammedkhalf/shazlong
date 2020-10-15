@@ -272,6 +272,14 @@ h1,h2,h3,h4,h5 .lead
 	margin-bottom: 10px;
 }
 
+#sidebar
+{
+	background: #fff;
+	padding: 10px;
+	border: 1px solid #DDD;
+	margin-bottom: 20px;
+}
+
 #sidebar .text-info
 {
 	font-family: 'Cairo';
@@ -935,4 +943,11 @@ border-radius: 4px;
 #major
 {
 	font-weight: bold;
+}
+.search_result
+{
+	background: #fff;
+	padding: 10px;
+	border: 1px solid #DDD;
+	margin-bottom: 20px;
 }

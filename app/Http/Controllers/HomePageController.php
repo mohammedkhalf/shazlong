@@ -15,9 +15,17 @@ class HomePageController extends Controller
     public function index()
     {
         // display therapist List
-        $allDoctors = Doctor::with('major')->get();
-        $allMajors = Major::all();
-        return view('welcome')->with(['allDoctors'=>$allDoctors,'allMajors'=>$allMajors]);
+        return view('welcome')->with(['allDoctors'=>Doctor::with('major')->get(),'allMajors'=>Major::all()]);
+    }
+
+
+    public function search(Request $request)
+    {
+        if($request->ajax())
+        {   
+            $allTherapist = Doctor::where('name','LIKE','%'.$request->search."%")->get();
+            return  response()->json(['data'=> $allTherapist]);
+        }
     }
 
     /**
